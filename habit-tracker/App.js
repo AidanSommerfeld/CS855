@@ -3,27 +3,17 @@ import { Button, View, Text } from 'react-native';
 import { NavigationContainer, DarkTheme, DefaultTheme} from '@react-navigation/native';
 import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-
-import DailyScreen from './components/DailyScreen'
-import WeeklyScreen from './components/WeeklyScreen'
-import MonthlyScreen from './components/MonthlyScreen'
-
-
-const Drawer = createDrawerNavigator();
+import NavigatonElements from './components/Navigation'
 
 
 function App() {
   const scheme = useColorScheme();
   return (
-    <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen name="Daily" component={DailyScreen} />
-        <Drawer.Screen name="Weekly" component={WeeklyScreen} />
-        <Drawer.Screen name="Monthly" component={MonthlyScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigatonElements></NavigatonElements>
+    </SafeAreaProvider>
   );
 }
 export default App;
