@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { View, Button, Text, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -9,19 +10,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import DailyScreen from '../components/DailyScreen'
-import WeeklyScreen from '../components/WeeklyScreen'
-import MonthlyScreen from '../components/MonthlyScreen'
-import SettingsScreen from '../components/SettingsScreen'
+import DailyScreen from '../components/DailyScreen';
+import WeeklyScreen from '../components/WeeklyScreen';
+import MonthlyScreen from '../components/MonthlyScreen';
+import SettingsScreen from '../components/SettingsScreen';
 
-import { LightTheme, DarkTheme } from '../styles/Themes'
+import { LightTheme, DarkTheme } from '../styles/Themes';
 import { useTheme } from '@react-navigation/native';
+
+import { ThemeContext } from './ThemeContext';
 
 
 const Drawer = createDrawerNavigator();
 function TasksScreen() {
   const { colors } = useTheme();
-
   return(
     <Drawer.Navigator screenOptions={{drawerType: 'slide', swipeEdgeWidth: 100, headerTintColor: colors.text}}>
       <Drawer.Screen name="Daily" component={DailyScreen} />
@@ -48,13 +50,19 @@ function HomeTabs() {
 
 const RootStack = createNativeStackNavigator();
 export default function NavigatonElements(){
+  const [darkTheme, useDarkTheme] = useState(true);
+  const themeData = {darkTheme, useDarkTheme};
+  const { colors } = useTheme();
   return (
-      <NavigationContainer theme={DarkTheme}>
+    <ThemeContext.Provider value={themeData}>
+      <StatusBar barStyle={darkTheme ? 'light-content' : 'dark-content'}/>
+      <NavigationContainer theme={darkTheme === true ? DarkTheme : LightTheme}>
         <RootStack.Navigator>
           <RootStack.Screen name="Home" component={HomeTabs} options={{ headerShown: false }}/>
           <RootStack.Screen name="Settings" component={SettingsScreen} />
         </RootStack.Navigator>
       </NavigationContainer>
+    </ThemeContext.Provider>
   );
 }
 
