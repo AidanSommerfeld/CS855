@@ -1,7 +1,11 @@
-import { CREATE_TASK, DELETE_TASK} from '../actions/types';
+import { CREATE_TASK, DELETE_TASK, UPDATE_TASK, RENAME_TASK, GET_TASKS_BEFORE} from '../actions/types';
+import uuid from 'react-native-uuid';
 
 const taskState = {
-  taskList: []
+  taskList: [],
+  dailyTaskList:[],
+  weeklyTaskList:[],
+  monthlyTaskList:[],
 }
 
 const taskReducer = (state = taskState, action) => {
@@ -10,15 +14,35 @@ const taskReducer = (state = taskState, action) => {
       return {
         ...state,
         taskList: state.taskList.concat({
-          id: Math.random(),
+          id: uuid.v4(),
           title: action.title,
-          isChecked: action.checked
+          isChecked: action.isChecked,
+          deadline: action.deadline
       })};
     case DELETE_TASK:
       return {
         ...state, 
-        tasklist: state.tasklist.filter((item) =>
-        item.key !== action.key)
+        taskList: state.taskList.filter((item) =>
+        item.id !== action.id)
+      };
+    case UPDATE_TASK:
+      return {...state, 
+        taskList: state.taskList.map(item => item.id === action.id ? 
+        {...item, isChecked: action.isChecked} :
+        item
+        )
+      };
+    case RENAME_TASK:
+      return {...state, 
+        taskList: state.taskList.map(item => item.id === action.id ? 
+        {...item, title: action.title} :
+        item
+        )
+      };
+    case GET_TASKS_BEFORE:
+      return{...state, 
+        dailyTaskList: state.taskList.filter((item) =>
+          Date.parse(item.deadline) <= Date.parse(action.deadline))
       };
     default:
       return state;

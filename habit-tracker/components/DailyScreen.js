@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Button, View, Text, ScrollView, StyleSheet, FlatList, Pressable, Modal, Alert } from 'react-native';
 import { useTheme } from '@react-navigation/native';
@@ -17,15 +17,8 @@ import Line from './Line';
 import Task from './Task';
 
 import TaskCreator from './TaskCreator';
+import { getTasksBefore } from '../actions/task';
 import { useSelector, useDispatch } from "react-redux";
- 
-
-const data = [
-  { id: 1, title: 'Do dishes', isChecked: false },
-  { id: 2, title: 'Do laundry', isChecked: false },
-  { id: 3, title: 'Take out garbage', isChecked: false },
-  { id: 4, title: 'Go shopping', isChecked: false },
-];
 
 function GetColors(time){
   const { colors, dark } = useTheme();
@@ -61,12 +54,20 @@ function GetTime(){
 
 export default function DailyScreen({ navigation }) {
   const { colors } = useTheme();
-  const [dailyPercent, setDailyPercent] = useState(0.5);
-  const [time, setTime] = useState(GetTime());
+  const [dailyPercent, setDailyPercent] = useState(0.0);
+  const [greetingTime, setGreetingTime] = useState(GetTime());
   const [modalVisible, setModalVisible] = useState(false);
+  const [taskOptionsVisible, setTaskOptionsVisible] = useState(false);
   
   const taskList = useSelector((state) => state.tasksReducer.taskList);
+  const dailyTaskList = useSelector((state) => state.tasksReducer.dailyTaskList);
 
+  let taskListLength = Object.keys(taskList).length;
+  let count = taskList.filter(function(element) {
+      return element.isChecked === true;
+    }).length;
+
+  //console.log(taskList);
   let [fontsLoaded] = useFonts({
     Questrial_400Regular,
   });
@@ -76,7 +77,7 @@ export default function DailyScreen({ navigation }) {
   else
   return (
   <LinearGradient
-    colors={GetColors(time)}
+    colors={GetColors(greetingTime)}
     style={{flex:1}}>
 
     <Modal
@@ -92,9 +93,9 @@ export default function DailyScreen({ navigation }) {
 
     <ScrollView style={{flex:1, alignContent:'center'}}>
       <View style={{flex:1, alignContent:'center'}}>
-        <Text style={[styles.greeting, {color:colors.text, textAlign:'center', fontFamily: 'Questrial_400Regular',}]}>Good {time}.</Text>
+        <Text style={[styles.greeting, {color:colors.text, textAlign:'center', fontFamily: 'Questrial_400Regular',}]}>Good {greetingTime}.</Text>
         <View style={styles.progressMargin}>
-          <ProgressBar style={[styles.progress, styles.topProgress]} progress={dailyPercent} color={colors.primary} />
+          <ProgressBar style={[styles.progress, styles.topProgress]} progress={count/taskListLength} color={colors.primary} />
         </View>
       </View>
       
@@ -136,24 +137,50 @@ export default function DailyScreen({ navigation }) {
       
       <View>
         <View style={styles.inline}>
-          <Text style={{color:colors.text, fontFamily: 'Questrial_400Regular', fontSize: 20, margin:15}} >Tasks</Text>
+          <Text style={{color:colors.text, fontFamily: 'Questrial_400Regular', fontSize: 20, margin:15, flexGrow:1}} >Tasks</Text>
+
+          <Pressable
+            onPress={() => setTaskOptionsVisible(!taskOptionsVisible)}
+          >
+          <View>
+              <AntDesign name="edit" size={24} color={colors.text} style={{marginRight:20}}/>
+          </View>
+          </Pressable>
           <Pressable
             onPress={() => setModalVisible(true)}
           >
-            <AntDesign name="pluscircleo" size={24} color={colors.text} style={{marginRight:20}}/>
+          <View>
+              <AntDesign name="pluscircleo" size={24} color={colors.text} style={{marginRight:20}}/>
+          </View>
           </Pressable>
         </View>
         <FlatList
           data={taskList}
-          renderItem={({ item }) => (
+          renderItem={({ item }) => ( !item.isChecked ?
           <Task
             title={item.title}
             id={item.id}
             selected={item.selected}
-          />
+            editing={taskOptionsVisible}
+          /> : null
         )}
         />
       </View>
+
+      <Text style={{color:colors.border, fontFamily: 'Questrial_400Regular', fontSize: 20, margin:15, flexGrow:1}} >Completed</Text>
+
+      <FlatList
+          data={taskList}
+          renderItem={({ item }) => ( item.isChecked ?
+          <Task
+            title={item.title}
+            id={item.id}
+            selected={item.isChecked}
+            editing={taskOptionsVisible}
+          /> : null
+        )}
+        />
+
     </ScrollView>
   </LinearGradient>
   );
