@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
-import { Button, View, Text, ScrollView, StyleSheet, FlatList, Pressable, Modal, Alert } from 'react-native';
+import { Button, View, Text, ScrollView, StyleSheet, FlatList, Pressable, Alert } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
 import { ProgressBar } from 'react-native-paper';
@@ -25,103 +25,41 @@ import { useSelector, useDispatch } from "react-redux";
 import * as Haptics from 'expo-haptics';
 import { VibrationContext } from '../contexts/VibrationContext';
 
-function GetColors(time){
-  const { colors, dark } = useTheme();
-  if(time == 'morning'){
-      return [colors.background, colors.morningA, colors.morningB]
-  }
-  else if (time == 'evening')
-  {
-    return [colors.background, colors.background, colors.evening]
-  }
-  else if(time == 'night')
-  {
-    return [colors.background, colors.background, colors.night]
-  }
-  else if (time == 'afternoon')
-  {
-    return [colors.background, colors.afternoonA, colors.afternoonB]
-  }
-}
-
-function GetTime(){
-  var today = new Date(); 
-  var hour = today.getHours();
-  if(hour < 12)
-    return 'morning';
-  else if(hour < 18)
-    return 'afternoon';
-  else if (hour < 21)
-    return 'evening';
-  else
-    return 'night';
-}
 
 
-export default function DailyScreen({ navigation }) {
+export default function HistoryScreen({ navigation, route }) {
   const { colors } = useTheme();
   const [dailyPercent, setDailyPercent] = useState(0.0);
-  const [greetingTime, setGreetingTime] = useState(GetTime());
   const [modalVisible, setModalVisible] = useState(false);
   const [taskOptionsVisible, setTaskOptionsVisible] = useState(false);
 
-  const taskList = useSelector((state) => state.tasksReducer.taskList);
+  const dailyTaskList = useSelector((state) => state.tasksReducer.taskList.filter((item) => Date.parse(item.deadline) > route.params.day.startDate &&
+                                                                                              Date.parse(item.deadline) < route.params.day.endDate ));
+
+  let percent = 1;
+  if(dailyTaskList.length > 0)
+    percent = dailyTaskList.filter((item)=> item.isChecked == true).length/dailyTaskList.length;
+
+  console.log(dailyTaskList);
+  
   const { vibration, useVibration } = React.useContext(VibrationContext);
   
-  const endOfDay = new Date();
-  const dateString = endOfDay.toDateString();
-  endOfDay.setUTCHours(23, 59, 59, 999);
-  const dailyTaskList = useSelector((state) => state.tasksReducer.taskList.filter((item) =>
-          Date.parse(item.deadline) <= endOfDay));
 
-  let taskListLength = Object.keys(taskList).length;
-  let count = taskList.filter(function(element) {
-      return element.isChecked === true;
-    }).length;
 
-  //console.log(taskList);
-  let [fontsLoaded] = useFonts({
-    Questrial_400Regular,
-  });
-
-  if(!fontsLoaded)
-    return(<AppLoading/>)
-  else
   return (
-  <LinearGradient
-    colors={GetColors(greetingTime)}
-    style={{flex:1}}>
-
-    <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-    }}>
-      <TaskCreator setModalVisible={setModalVisible} modalVisible={modalVisible}/>
-    </Modal>
+  <View
+    style={{backgroundColor: colors.background, flex:1}}>
 
     <ScrollView style={{flex:1, alignContent:'center'}}>
       <View style={{flex:1, alignContent:'center'}}>
-        <Text style={[styles.greeting, {color:colors.text, textAlign:'center', fontFamily: 'Questrial_400Regular',}]}>Good {greetingTime}.</Text>
-        <Text style={{color:colors.text, textAlign:'center', fontFamily: 'Questrial_400Regular', fontSize:25, marginBottom:25}}>{dateString}</Text>
+        <Text style={{marginTop: 25, color:colors.text, textAlign:'center', fontFamily: 'Questrial_400Regular', fontSize:25, marginBottom:25}}>
+          {route.params.day.startDate.toDateString()}
+        </Text>
         <View style={styles.progressMargin}>
-          <ProgressBar style={[styles.progress, styles.topProgress]} progress={count/taskListLength} color={colors.primary} />
+          <ProgressBar style={[styles.progress, styles.topProgress]} progress={percent} color={colors.primary} />
         </View>
       </View>
       
-      <Line/>
-        <Pressable
-        onPress={() => {
-          if(vibration)
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          navigation.navigate("Daily Reminders")}}
-        >
-          <DailyReminderWidget/>
-        </Pressable>
-      <Line/>
       
       <View>
         <View style={styles.inline}>
@@ -177,16 +115,11 @@ export default function DailyScreen({ navigation }) {
         />
 
     </ScrollView>
-  </LinearGradient>
+  </View>
   );
 }
 
 const styles = StyleSheet.create({
-  greeting:{
-    fontSize: 40,
-    padding: 10,
-    paddingTop: 30,
-  },
   inline:{
     flexDirection: "row",
     justifyContent: "space-between",

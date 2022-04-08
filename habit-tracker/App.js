@@ -12,15 +12,22 @@ import NavigatonElements from './components/Navigation'
 
 import { Provider } from 'react-redux';
 import configureStore from './store';
+import { persistStore, persistReducer } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const store = configureStore();
+
+const persistor = persistStore(store);
+
 
 function App() {
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-          <NavigatonElements></NavigatonElements>
-      </SafeAreaProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <SafeAreaProvider>
+            <NavigatonElements/>
+        </SafeAreaProvider>
+      </PersistGate>
     </Provider>
   );
 }

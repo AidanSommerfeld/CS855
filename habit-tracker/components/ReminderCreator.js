@@ -5,18 +5,16 @@ import { useTheme } from '@react-navigation/native';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 import { AntDesign } from '@expo/vector-icons'; 
 import { connect } from 'react-redux';
-import { createTask, updateTask, deleteTask } from '../actions/task'
+import { createReminder, updateReminder, deleteReminder } from '../actions/task'
 import { useSelector, useDispatch } from "react-redux";
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import * as Haptics from 'expo-haptics';
-import { VibrationContext } from '../contexts/VibrationContext';
+import moment from "moment";
 
 
-export default function TaskCreator({setModalVisible, modalVisible}){
+export default function ReminderCreator({setModalVisible, modalVisible, type}){
   const { colors, isDark } = useTheme();
-  const { vibration, useVibration } = React.useContext(VibrationContext);
 
   const [title, onChangeTitle] = useState('');
   const [show, setShow] = useState(false);
@@ -29,21 +27,19 @@ export default function TaskCreator({setModalVisible, modalVisible}){
     const currentDate = selectedDate;
     setShow(false);
     if(currentDate != null)
+      currentDate.setSeconds(0,0);
       setDate(currentDate);
   };
 
-  const Submit = () => {
-    if(vibration)
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    
+  const Submit = (category) => {
     if( title !== "")
     {
-      dispatch(createTask({title:title, deadline:date.toISOString()}));
+      dispatch(createReminder({title:title, time:date.toISOString(), category:category}));
       setModalVisible(!modalVisible);
     }
     else
     {
-      Alert.alert("Task name cannot be empty");
+      Alert.alert( type + " name cannot be empty");
     }
   }
 
@@ -51,12 +47,9 @@ export default function TaskCreator({setModalVisible, modalVisible}){
     <View style={styles.centeredView}>
       <View style={[styles.modalView, {backgroundColor:colors.card}]}>
         <View style={styles.inline}>
-          <Text style={[styles.taskTitle,{color:colors.text}]}>Create New Task</Text>
+          <Text style={[styles.taskTitle,{color:colors.text}]}>Create New {type}</Text>
           <Pressable
-            onPress={() => {
-              if(vibration)
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              setModalVisible(!modalVisible)}}
+            onPress={() => setModalVisible(!modalVisible)}
           >
             <AntDesign name="closecircleo" size={24} color={colors.text} />
           </Pressable>
@@ -73,24 +66,24 @@ export default function TaskCreator({setModalVisible, modalVisible}){
 
         <View style={[styles.inline, {justifyContent:'center', marginBottom:10}]}>
           <Pressable style={[styles.button, styles.buttonClose, {backgroundColor:colors.primary, marginRight:12}]} onPress={() => setShow(true)}>
-            <AntDesign name="calendar" size={24} color={colors.background} />
+            <AntDesign name="clockcircleo" size={24} color={colors.background} />
           </Pressable>
-          <Text style={{color:colors.text}}> Task deadline is {"\n"}{date.toDateString()}</Text>
+          <Text style={{color:colors.text}}> At {moment(date).format('h:mm A')}</Text>
         </View>
 
         {show && <DateTimePicker
           testID="dateTimePicker"
           value={date}
-          mode={'date'}
+          mode={'time'}
           colorAccent={colors.primary}
-          is24Hour={true}
+          is24Hour={false}
           onChange={onChange}
         />}
 
         <Pressable
           style={[styles.button, styles.buttonClose, {backgroundColor:colors.primary}]}
           onPress={() => {
-              Submit();
+              Submit(type);
             }
           }
         >

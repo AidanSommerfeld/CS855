@@ -14,11 +14,16 @@ import DailyScreen from '../components/DailyScreen';
 import WeeklyScreen from '../components/WeeklyScreen';
 import MonthlyScreen from '../components/MonthlyScreen';
 import SettingsScreen from '../components/SettingsScreen';
+import RemindersSettingsScreen from '../components/RemindersSettingsScreen';
+import DailyReminders from '../components/DailyReminders';
+import History from '../components/History';
 
 import { LightTheme, DarkTheme } from '../styles/Themes';
 import { useTheme } from '@react-navigation/native';
 
-import { ThemeContext } from './ThemeContext';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { NotificationContext } from '../contexts/NotificationContext';
+import { VibrationContext } from '../contexts/VibrationContext';
 
 
 const Drawer = createDrawerNavigator();
@@ -41,6 +46,9 @@ function HomeTabs() {
       <Tab.Screen name="Home" component={TasksScreen} options={{ headerShown: false, tabBarIcon: ({ focused, color, size }) => (
           <Feather name="home" size={size} color={color} />
         )}} />
+      <Tab.Screen name="Reminders" component={RemindersSettingsScreen} options ={{tabBarIcon: ({ focused, color, size }) => (
+          <Feather name="check-square" size={size} color={color} />
+        )}}/>
       <Tab.Screen name="Settings" component={SettingsScreen} options ={{tabBarIcon: ({ focused, color, size }) => (
           <Feather name="settings" size={size} color={color} />
         )}}/>
@@ -51,18 +59,29 @@ function HomeTabs() {
 const RootStack = createNativeStackNavigator();
 export default function NavigatonElements(){
   const [darkTheme, useDarkTheme] = useState(true);
+  const [notifications, useNotifications] = useState(false);
+  const [vibration, useVibration] = useState(true);
+
   const themeData = {darkTheme, useDarkTheme};
+  const notificationData = {notifications, useNotifications};
+  const vibrationData = {vibration, useVibration}
+
   const { colors } = useTheme();
   return (
-    <ThemeContext.Provider value={themeData}>
-      <StatusBar barStyle={darkTheme ? 'light-content' : 'dark-content'}/>
-      <NavigationContainer theme={darkTheme === true ? DarkTheme : LightTheme}>
-        <RootStack.Navigator>
-          <RootStack.Screen name="Home" component={HomeTabs} options={{ headerShown: false }}/>
-          <RootStack.Screen name="Settings" component={SettingsScreen} />
-        </RootStack.Navigator>
-      </NavigationContainer>
-    </ThemeContext.Provider>
+    <NotificationContext.Provider value = {notificationData}>
+      <VibrationContext.Provider value = {vibrationData}>
+        <ThemeContext.Provider value={themeData}>
+          <StatusBar barStyle={darkTheme ? 'light-content' : 'dark-content'}/>
+          <NavigationContainer theme={darkTheme === true ? DarkTheme : LightTheme}>
+            <RootStack.Navigator>
+              <RootStack.Screen name="Home" component={HomeTabs} options={{ headerShown: false }}/>
+              <RootStack.Screen name="Daily Reminders" component={DailyReminders} options={{ presentation: 'transparentModal' }}/>
+              <RootStack.Screen name="History" component={History} options={{ presentation: 'transparentModal' }}/>
+            </RootStack.Navigator>
+          </NavigationContainer>
+        </ThemeContext.Provider>
+      </VibrationContext.Provider>
+    </NotificationContext.Provider>
   );
 }
 

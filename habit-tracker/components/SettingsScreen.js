@@ -2,16 +2,30 @@ import * as React from 'react';
 import { useState, useRef } from 'react';
 import { Button, View, Text, Switch, StyleSheet, ScrollView, Pressable, Animated} from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { ThemeContext } from './ThemeContext';
+
+import { ThemeContext } from '../contexts/ThemeContext';
+import { NotificationContext } from '../contexts/NotificationContext';
+import { VibrationContext } from '../contexts/VibrationContext';
 
 import { Feather } from '@expo/vector-icons'; 
 import { LinearGradient } from 'expo-linear-gradient';
 
-function ThemeSelector({ navigation }) {
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAllData } from '../actions/task'
+
+import * as Haptics from 'expo-haptics';
+
+function ThemeSelector() {
   const { useDarkTheme, darkTheme } = React.useContext(ThemeContext);
+  const { vibration, useVibration } = React.useContext(VibrationContext);
   const { colors } = useTheme();
 
-  const ToggleTheme = () => useDarkTheme(previousState => !previousState);
+  const dispatch = useDispatch();
+
+  const ToggleTheme = () => {
+    if(vibration) 
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); 
+    useDarkTheme(previousState => !previousState)};
   return (
     <View style={[styles.first, styles.item, styles.toggleItem, { backgroundColor:colors.card, borderBottomWidth:2, borderBottomColor:colors.border}]}>
       <Text style={[styles.title, {color:colors.text}]}>Use Dark Mode</Text>
@@ -27,11 +41,15 @@ function ThemeSelector({ navigation }) {
   );
 }
 
-function NotificationSelector({ navigation }) {
-  const { useDarkTheme, darkTheme } = React.useContext(ThemeContext);
+function NotificationSelector() {
+  const { useNotifications, notifications } = React.useContext(NotificationContext);
+  const { vibration, useVibration } = React.useContext(VibrationContext);
   const { colors } = useTheme();
 
-  const ToggleNotifications = () => useDarkTheme(previousState => !previousState);
+  const ToggleNotifications = () => {
+    if(vibration) 
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    useNotifications(previousState => !previousState)};
   return (
     <View style={[styles.item, styles.toggleItem, { backgroundColor:colors.card, borderBottomWidth:2, borderBottomColor:colors.border}]}>
       <Text style={[styles.title, {color:colors.text}]}>Push Notifications</Text>
@@ -39,9 +57,32 @@ function NotificationSelector({ navigation }) {
         style={styles.switch}
         title="Switch Theme"
         trackColor={{ false: colors.border, true: colors.primary }}
-        thumbColor={darkTheme ? colors.border : colors.primary}
+        thumbColor={notifications ? colors.border : colors.primary}
         onValueChange={ToggleNotifications}
-        value={darkTheme}
+        value={notifications}
+      />
+    </View>
+  );
+}
+
+function VibrationSelector() {
+  const { vibration, useVibration } = React.useContext(VibrationContext);
+  const { colors } = useTheme();
+
+  const ToggleVibration = () => {
+    if(!vibration)
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      useVibration(previousState => !previousState)};
+  return (
+    <View style={[styles.item, styles.toggleItem, { backgroundColor:colors.card, borderBottomWidth:2, borderBottomColor:colors.border}]}>
+      <Text style={[styles.title, {color:colors.text}]}>Use Vibration</Text>
+      <Switch
+        style={styles.switch}
+        title="Switch Theme"
+        trackColor={{ false: colors.border, true: colors.primary }}
+        thumbColor={vibration ? colors.border : colors.primary}
+        onValueChange={ToggleVibration}
+        value={vibration}
       />
     </View>
   );
@@ -51,6 +92,7 @@ function DeleteOption(){
   var timer = useRef(new Animated.Value(0)).current;
   var timerId;
   const [percent, setPercent] = useState(0.0);
+  const dispatch = useDispatch();
 
   const updateTimer = ({value}) =>{
     setPercent(value);
@@ -64,8 +106,9 @@ function DeleteOption(){
     duration: 5000, 
     useNativeDriver: false
     }).start(({ finished }) => {
-      if(finished)
-        console.log("Delete all data")
+      if(finished){
+        dispatch(deleteAllData())
+      }
     });
   };
 
@@ -98,10 +141,10 @@ function DeleteOption(){
 export default function SettingsScreen() {
   const { colors } = useTheme();
   return(
-    <ScrollView>
-      <Text style={[styles.header, {color:colors.primary}]}>Preferences</Text>
+    <ScrollView style={{marginTop:15}}>
       <ThemeSelector/>
       <NotificationSelector/>
+      <VibrationSelector/>
       <DeleteOption/>
     </ScrollView>
   );
@@ -129,10 +172,6 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingTop:2,
     paddingBottom:2,
-  },
-  header: {
-    fontSize: 32,
-    padding: 10
   },
   title: {
     fontSize: 24,
