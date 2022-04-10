@@ -1,6 +1,6 @@
 import { CREATE_TASK, DELETE_TASK, UPDATE_TASK, RENAME_TASK, GET_TASKS_BEFORE,
          CREATE_REMINDER, DELETE_REMINDER, UPDATE_REMINDER_NAME, UPDATE_REMINDER_TIME, CREATE_DAILY_PROGRESS, UPDATE_DAILY_PROGRESS,
-         DELETE_ALL_DATA} from '../actions/types';
+         DELETE_ALL_DATA, SET_THEME, SET_VIBRATION} from '../actions/types';
 import uuid from 'react-native-uuid';
 
 const resetValues = {
@@ -15,6 +15,8 @@ const resetValues = {
   },
   previousDailyReminderProgress:[],
   remindersUpdated: true,
+  darkTheme:true,
+  vibration:true,
 }
 
 const taskState = {
@@ -29,6 +31,8 @@ const taskState = {
   },
   previousDailyReminderProgress:[],
   remindersUpdated: true,
+  darkTheme:true,
+  vibration:true,
 }
 
 const taskReducer = (state = taskState, action) => {
@@ -60,7 +64,7 @@ const taskReducer = (state = taskState, action) => {
         taskList: state.taskList.map(item => item.id === action.id ? 
         {...item, title: action.title} :
         item
-        )
+        ), 
       };
     case CREATE_REMINDER:
       return{...state,
@@ -80,6 +84,24 @@ const taskReducer = (state = taskState, action) => {
         {...item, title: action.title} :
         item
         ), 
+        dailyReminderProgress: {...state.dailyReminderProgress, 
+          meals: state.dailyReminderProgress.meals.map(item => item.id === action.id ? 
+          {...item, title: action.title} : 
+          item
+          ),
+          water: state.dailyReminderProgress.water.map(item => item.id === action.id ? 
+          {...item, title: action.title} : 
+          item
+          ),
+          meds: state.dailyReminderProgress.meds.map(item => item.id === action.id ? 
+          {...item, title: action.title} : 
+          item
+          ),
+          exercise: state.dailyReminderProgress.exercise.map(item => item.id === action.id ? 
+          {...item, title: action.title} : 
+          item
+          ),
+        },
         remindersUpdated: true
       };
     case UPDATE_REMINDER_TIME:
@@ -87,14 +109,38 @@ const taskReducer = (state = taskState, action) => {
         reminderList: state.reminderList.map(item => item.id === action.id ? 
         {...item, time: action.time} :
         item
-        ), 
+        ),
+        dailyReminderProgress: {...state.dailyReminderProgress, 
+          meals: state.dailyReminderProgress.meals.map(item => item.id === action.id ? 
+          {...item, time: action.time} : 
+          item
+          ),
+          water: state.dailyReminderProgress.water.map(item => item.id === action.id ? 
+          {...item, time: action.time} : 
+          item
+          ),
+          meds: state.dailyReminderProgress.meds.map(item => item.id === action.id ? 
+          {...item, time: action.time} : 
+          item
+          ),
+          exercise: state.dailyReminderProgress.exercise.map(item => item.id === action.id ? 
+          {...item, time: action.time} : 
+          item
+          ),
+        }, 
         remindersUpdated: true
       };
     case DELETE_REMINDER:
       return {
         ...state, 
         reminderList: state.reminderList.filter((item) =>
-        item.id !== action.id), 
+        item.id !== action.id),
+        dailyReminderProgress: {...state.dailyReminderProgress, 
+          meals: state.dailyReminderProgress.meals.filter((item) => item.id !== action.id ),
+          water: state.dailyReminderProgress.water.filter((item) => item.id !== action.id ),
+          meds: state.dailyReminderProgress.meds.filter((item) => item.id !== action.id ),
+          exercise: state.dailyReminderProgress.exercise.filter((item) => item.id !== action.id ),
+        },
         remindersUpdated: true
       };
     case CREATE_DAILY_PROGRESS:
@@ -170,6 +216,14 @@ const taskReducer = (state = taskState, action) => {
           }
         default:
           return state;
+      }
+    case SET_THEME:
+      return{...state,
+        darkTheme: action.darkTheme
+      }
+    case SET_VIBRATION:
+      return{...state,
+        vibration: action.vibration
       }
     case DELETE_ALL_DATA:
       return resetValues;

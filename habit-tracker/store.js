@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import taskReducer from './reducers/taskReducer'
 
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistStore, persistReducer } from 'redux-persist';
 
 const rootReducer = combineReducers({

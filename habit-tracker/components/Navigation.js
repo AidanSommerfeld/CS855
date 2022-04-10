@@ -10,20 +10,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import DailyScreen from '../components/DailyScreen';
-import WeeklyScreen from '../components/WeeklyScreen';
-import MonthlyScreen from '../components/MonthlyScreen';
-import SettingsScreen from '../components/SettingsScreen';
-import RemindersSettingsScreen from '../components/RemindersSettingsScreen';
-import DailyReminders from '../components/DailyReminders';
-import History from '../components/History';
+import DailyScreen from '/components/screens/DailyScreen';
+import WeeklyScreen from '/components/screens/WeeklyScreen';
+import MonthlyScreen from '/components/screens/MonthlyScreen';
+import SettingsScreen from '/components/screens/SettingsScreen';
+import RemindersSettingsScreen from '/components/reminders/RemindersSettingsScreen';
+import DailyReminders from '/components/reminders/DailyReminders';
+import History from '/components/screens/History';
 
-import { LightTheme, DarkTheme } from '../styles/Themes';
+import { LightTheme, DarkTheme } from '/styles/Themes';
 import { useTheme } from '@react-navigation/native';
 
-import { ThemeContext } from '../contexts/ThemeContext';
-import { NotificationContext } from '../contexts/NotificationContext';
-import { VibrationContext } from '../contexts/VibrationContext';
+import { ThemeContext } from '/contexts/ThemeContext';
+import { NotificationContext } from '/contexts/NotificationContext';
+import { VibrationContext } from '/contexts/VibrationContext';
 
 
 const Drawer = createDrawerNavigator();

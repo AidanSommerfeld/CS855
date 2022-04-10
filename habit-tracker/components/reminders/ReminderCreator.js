@@ -5,7 +5,7 @@ import { useTheme } from '@react-navigation/native';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 import { AntDesign } from '@expo/vector-icons'; 
 import { connect } from 'react-redux';
-import { createReminder, updateReminder, deleteReminder } from '../actions/task'
+import { createReminder, updateReminder, deleteReminder } from '/actions/task'
 import { useSelector, useDispatch } from "react-redux";
 
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -24,11 +24,13 @@ export default function ReminderCreator({setModalVisible, modalVisible, type}){
   const [date, setDate] = useState(today);
 
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
+    let currentDate = selectedDate;
     setShow(false);
     if(currentDate != null)
+    {
       currentDate.setSeconds(0,0);
       setDate(currentDate);
+    }
   };
 
   const Submit = (category) => {

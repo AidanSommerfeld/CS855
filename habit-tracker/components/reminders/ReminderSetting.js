@@ -5,11 +5,11 @@ import { useTheme } from '@react-navigation/native';
 import { View, Text, StyleSheet, TouchableWithoutFeedback, Alert, Pressable, TextInput } from 'react-native';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 
-import {  updateReminderName, deleteReminder, renameTask } from '../actions/task'
+import {  updateReminderName, deleteReminder, renameTask } from '/actions/task'
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
-import { getTasksBefore, updateReminderTime } from '../actions/task';
+import { getTasksBefore, updateReminderTime } from '/actions/task';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from "moment";
@@ -27,9 +27,11 @@ export default function ReminderSetting({title, id, editing, time}){
     const currentDate = selectedDate;
     setShowDatePicker(false);
     if(currentDate != null)
+    {
       currentDate.setSeconds(0,0);
       dispatch(updateReminderTime({id:id, time: currentDate.toISOString()}))
       setDate(currentDate);
+    }
   };
 
   return(
@@ -39,7 +41,6 @@ export default function ReminderSetting({title, id, editing, time}){
       <TextInput 
         style={[styles.textBox, {flexGrow:1}, {color:colors.text, borderColor: colors.text}]}
         onChangeText={(value)=>{
-          console.log(value);
           dispatch(updateReminderName({id:id, title:value}));
         }}
         defaultValue={title}

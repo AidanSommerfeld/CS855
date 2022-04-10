@@ -6,11 +6,11 @@ import { useTheme } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
-import { getTasksBefore } from '../actions/task';
+import { getTasksBefore } from '/actions/task';
 import { useSelector, useDispatch } from "react-redux";
 
-import ReminderSetting from '../components/ReminderSetting';
-import ReminderCreator from '../components/ReminderCreator';
+import ReminderSetting from '/components/reminders/ReminderSetting';
+import ReminderCreator from '/components/reminders/ReminderCreator';
 
 export default function RemindersSettingsScreen() {
   const { colors } = useTheme();
@@ -100,6 +100,7 @@ export default function RemindersSettingsScreen() {
             title={item.title}
             id={item.id}
             editing={waterOptionsVisible}
+            time={item.time}
           /> : null
         )}
         />
@@ -132,6 +133,7 @@ export default function RemindersSettingsScreen() {
             title={item.title}
             id={item.id}
             editing={medsOptionsVisible}
+            time={item.time}
           /> : null
         )}
         />
@@ -164,6 +166,7 @@ export default function RemindersSettingsScreen() {
             title={item.title}
             id={item.id}
             editing={exerciseOptionsVisible}
+            time={item.time}
           /> : null
         )}
         />

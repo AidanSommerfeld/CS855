@@ -8,14 +8,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 import AppLoading from 'expo-app-loading';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
-import Line from './Line';
-import Task from './Task';
+import Line from '/components/Line';
+import Task from '/components/tasks/Task';
 
-import TaskCreator from './TaskCreator';
-import { getTasksBefore } from '../actions/task';
+import TaskCreator from '/components/tasks/TaskCreator';
+import { getTasksBefore } from '/actions/task';
 import { useSelector, useDispatch } from "react-redux";
 
-import ProgressBar from './ProgressBar';
+import * as Haptics from 'expo-haptics';
+import { VibrationContext } from '/contexts/VibrationContext';
+
+import ProgressBar from '/components/ProgressBar';
 
 function GetColors(time){
   const { colors, dark } = useTheme();
@@ -52,7 +55,7 @@ function GetTime(){
 function getStartOfDay(day){
   let date = new Date();
 
-  let difference = day - date.getUTCDay();
+  let difference = day - date.getDay();
   date.setUTCDate(date.getDate() + difference)
   date.setUTCHours(0,0,0,0);
   return date;
@@ -61,7 +64,7 @@ function getStartOfDay(day){
 function getEndOfDay(day){
   let date = new Date();
   
-  let difference = day - date.getUTCDay();
+  let difference = day - date.getDay();
   date.setUTCDate(date.getDate() + difference)
   date.setUTCHours(23, 59, 59, 999);
   return date;
@@ -99,7 +102,9 @@ export default function WeeklyScreen({ navigation }) {
   const [greetingTime, setGreetingTime] = useState(GetTime());
   const [modalVisible, setModalVisible] = useState(false);
   const [taskOptionsVisible, setTaskOptionsVisible] = useState(false);
-  
+  const { vibration, useVibration } = React.useContext(VibrationContext);
+
+
   let firstDay = getStartOfDay(0);
   let lastDay = getEndOfDay(6);
   let dateString = new Date();
@@ -189,14 +194,20 @@ export default function WeeklyScreen({ navigation }) {
           <Text style={{color:colors.text, fontFamily: 'Questrial_400Regular', fontSize: 20, margin:15, flexGrow:1}} >Tasks</Text>
 
           <Pressable
-            onPress={() => setTaskOptionsVisible(!taskOptionsVisible)}
+            onPress={() => {
+              if(vibration)
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              setTaskOptionsVisible(!taskOptionsVisible)}}
           >
           <View>
               <AntDesign name="edit" size={24} color={colors.text} style={{marginRight:20}}/>
           </View>
           </Pressable>
           <Pressable
-            onPress={() => setModalVisible(true)}
+            onPress={() => {
+              if(vibration)
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              setModalVisible(true)}}
           >
           <View>
               <AntDesign name="pluscircleo" size={24} color={colors.text} style={{marginRight:20}}/>

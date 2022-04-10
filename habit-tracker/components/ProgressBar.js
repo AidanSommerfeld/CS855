@@ -5,9 +5,12 @@ import { useTheme } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 
+import * as Haptics from 'expo-haptics';
+import { VibrationContext } from '../contexts/VibrationContext';
+
 export default function ProgressBar({ day, percent, style, navigation}){
   const { colors } = useTheme();
-
+  const { vibration, useVibration } = React.useContext(VibrationContext);
   return(
     <View style={styles.barContainer}>
         <LinearGradient
@@ -19,9 +22,10 @@ export default function ProgressBar({ day, percent, style, navigation}){
         <Pressable
           style={{width:'100%', height: '100%', justifyContent:"center", alignItems:"center"}}
           onPress={()=> {
+            if(vibration)
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             navigation.navigate('History', { day: day })
           }}
-          
         >
           <Text style={[styles.textShadow, {color:colors.text, fontFamily: 'Questrial_400Regular', fontSize: 25}]}>{day.value}</Text>
         </Pressable>

@@ -13,17 +13,18 @@ import AppLoading from 'expo-app-loading';
 
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
-import Line from './Line';
-import Task from './Task';
+import Line from '/components/Line';
+import Task from '/components/tasks/Task';
 
-import TaskCreator from './TaskCreator';
-import DailyReminderWidget from './DailyReminderWidget'
+import TaskCreator from '/components/tasks/TaskCreator';
+import DailyReminderWidget from '/components/reminders/DailyReminderWidget'
 
-import { getTasksBefore, createDailyProgress } from '../actions/task';
+import { getTasksBefore, createDailyProgress } from '/actions/task';
 import { useSelector, useDispatch } from "react-redux";
 
 import * as Haptics from 'expo-haptics';
-import { VibrationContext } from '../contexts/VibrationContext';
+import { VibrationContext } from '/contexts/VibrationContext';
+import { ThemeContext } from '/contexts/ThemeContext';
 
 function GetColors(time){
   const { colors, dark } = useTheme();
@@ -66,7 +67,15 @@ export default function DailyScreen({ navigation }) {
   const [taskOptionsVisible, setTaskOptionsVisible] = useState(false);
 
   const taskList = useSelector((state) => state.tasksReducer.taskList);
+
+  const savedVibration = useSelector((state)=> state.tasksReducer.vibration)
   const { vibration, useVibration } = React.useContext(VibrationContext);
+  useVibration(savedVibration)
+
+  const { theme, useDarkTheme } = React.useContext(ThemeContext);
+  const savedDarkTheme = useSelector((state) => state.tasksReducer.darkTheme);
+  useDarkTheme(savedDarkTheme);
+
   
   const endOfDay = new Date();
   const dateString = endOfDay.toDateString();

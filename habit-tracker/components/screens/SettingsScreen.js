@@ -3,28 +3,32 @@ import { useState, useRef } from 'react';
 import { Button, View, Text, Switch, StyleSheet, ScrollView, Pressable, Animated} from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
-import { ThemeContext } from '../contexts/ThemeContext';
-import { NotificationContext } from '../contexts/NotificationContext';
-import { VibrationContext } from '../contexts/VibrationContext';
+import { ThemeContext } from '/contexts/ThemeContext';
+import { NotificationContext } from '/contexts/NotificationContext';
+import { VibrationContext } from '/contexts/VibrationContext';
 
 import { Feather } from '@expo/vector-icons'; 
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAllData } from '../actions/task'
+import { deleteAllData, setTheme, setVibration } from '/actions/task'
 
 import * as Haptics from 'expo-haptics';
+
 
 function ThemeSelector() {
   const { useDarkTheme, darkTheme } = React.useContext(ThemeContext);
   const { vibration, useVibration } = React.useContext(VibrationContext);
   const { colors } = useTheme();
 
+  let savedDarkTheme = useSelector((state) => state.tasksReducer.darkTheme);
+  
   const dispatch = useDispatch();
 
   const ToggleTheme = () => {
     if(vibration) 
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); 
+    dispatch(setTheme(!darkTheme))
     useDarkTheme(previousState => !previousState)};
   return (
     <View style={[styles.first, styles.item, styles.toggleItem, { backgroundColor:colors.card, borderBottomWidth:2, borderBottomColor:colors.border}]}>
@@ -35,7 +39,7 @@ function ThemeSelector() {
         trackColor={{ false: colors.border, true: colors.primary }}
         thumbColor={darkTheme ? colors.border : colors.primary}
         onValueChange={ToggleTheme}
-        value={darkTheme}
+        value={savedDarkTheme}
       />
     </View>
   );
@@ -69,9 +73,14 @@ function VibrationSelector() {
   const { vibration, useVibration } = React.useContext(VibrationContext);
   const { colors } = useTheme();
 
+  let savedVibration = useSelector((state) => state.tasksReducer.vibration);
+  const dispatch = useDispatch();
+
   const ToggleVibration = () => {
     if(!vibration)
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+
+      dispatch(setVibration(!vibration))
       useVibration(previousState => !previousState)};
   return (
     <View style={[styles.item, styles.toggleItem, { backgroundColor:colors.card, borderBottomWidth:2, borderBottomColor:colors.border}]}>
@@ -82,7 +91,7 @@ function VibrationSelector() {
         trackColor={{ false: colors.border, true: colors.primary }}
         thumbColor={vibration ? colors.border : colors.primary}
         onValueChange={ToggleVibration}
-        value={vibration}
+        value={savedVibration}
       />
     </View>
   );
@@ -143,7 +152,6 @@ export default function SettingsScreen() {
   return(
     <ScrollView style={{marginTop:15}}>
       <ThemeSelector/>
-      <NotificationSelector/>
       <VibrationSelector/>
       <DeleteOption/>
     </ScrollView>

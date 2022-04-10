@@ -1,6 +1,6 @@
 import {CREATE_TASK, DELETE_TASK, UPDATE_TASK, RENAME_TASK, GET_TASKS_BEFORE,
         CREATE_REMINDER, DELETE_REMINDER, UPDATE_REMINDER_NAME, UPDATE_REMINDER_TIME,
-          CREATE_DAILY_PROGRESS, UPDATE_DAILY_PROGRESS, DELETE_ALL_DATA} from './types';
+          CREATE_DAILY_PROGRESS, UPDATE_DAILY_PROGRESS, DELETE_ALL_DATA, SET_THEME, SET_VIBRATION} from '/actions/types';
 
 export const createTask = (task) => ({
     type: CREATE_TASK, 
@@ -72,4 +72,14 @@ export const updateReminder = (reminder) =>({
 
 export const deleteAllData = () =>({
   type: DELETE_ALL_DATA,
+})
+
+export const setTheme = (useDarkTheme) => ({
+  type: SET_THEME,
+  darkTheme: useDarkTheme
+})
+
+export const setVibration = (useVibration) => ({
+  type: SET_VIBRATION,
+  vibration: useVibration
 })
