@@ -30,6 +30,11 @@ A task is anything that has a deadline and can be completed over the course of o
 6. [Manifest](#manifest)
 
 ## Features
+![Screens](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/BannerScreens.png)
+<p align="center">
+  <b>Habit Tracker main screens</b>
+</p>
+
 
 
 ## Installation Instructions
