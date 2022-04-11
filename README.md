@@ -2,6 +2,7 @@
 ![Lines of code](https://img.shields.io/tokei/lines/github/AidanSommerfeld/CS855)
 ![GitHub top language](https://img.shields.io/github/languages/top/AidanSommerfeld/CS855)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE.md)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/AidanSommerfeld/CS855?include_prereleases)
 
 ![banner](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Banner.png)
 
