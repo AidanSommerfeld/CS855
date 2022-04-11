@@ -62,6 +62,8 @@ The user can interact with and complete daily reminders by tapping anywhere unde
 The example shows a user creating a new reminder. They give it a title, then select a date with the date picker. Then they check off their daily tasks, and complete some of their daily reminders. 
 
 ### Reminders
+<img align="right" height="475" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Reminders-Animation.gif"/>
+
 ### Settings
 
 ## Installation Instructions
