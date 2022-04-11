@@ -27,7 +27,7 @@ A task is anything that has a deadline and can be completed over the course of o
 3. [Technical Stuff](#technical-stuff)
 4. [What's Next](#whats-next)
 5. [Known Bugs](#known-bugs)
-6. [Manifest](#manifest)
+6. [Contact Information](#contact-information)
 
 ## Features
 ![Screens](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/BannerScreens.png)
@@ -155,8 +155,17 @@ In addition to the daily and weekly pages, it would be useful to have a monthly 
 In its current state, the application is little more than a digital dayplanner. In order to increase its usefulness and provide some real functionality, I would like to implement an algorithm that intelligently orders the tasks in order of importance. Additionally, I would like to automatically create short term daily goals when there is a long term goal like a final project. 
 If there was a final project due in 2 months, the application would generate several goals each week related to this task. This would allow the user to stay focused on these long term goals by creating consistent related short term goals. Unfortunately this was out of the scope of this project, but I believe this would be useful to me in the future. 
 
+### Bug Fixes
+There are a few known bugs that I need to fix before this application would be considered production ready. I would like to fix these errors before moving on to the next features. 
+
 
 ## Known Bugs
+- Date and time is not always consistent
+  - This is likely due to the data being stored as iso time, and converted to local time in the view. 
+  - This can cause issues where the tasks do not always show up on the right day in the weekly screen. 
+- Hidden tasks that affect the progress bar
+  - Sometimes there are tasks that do not show up in the daily view that affect the overall daily progress. 
+  - This is disruptive as the user must remove the task from the weekly screen or wipe all data. 
 
-
-## Manifest
+## Contact information
+If you run into any problems, feel free to contact me using the following email: sommerai@uregina.ca. I would be happy to help you solve any problems you run into. 
