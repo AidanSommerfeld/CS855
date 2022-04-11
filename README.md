@@ -1,4 +1,7 @@
 # CS855 - Habit Tracker
+
+![banner](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Banner.png)
+
 ## About
 
 
