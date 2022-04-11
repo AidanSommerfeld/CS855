@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE.md)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/AidanSommerfeld/CS855?include_prereleases)
 ![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/AidanSommerfeld/CS855)
+[![runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.dev/client)
 
 ![banner](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Banner.png)
 
