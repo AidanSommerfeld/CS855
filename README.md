@@ -121,9 +121,13 @@ Alternitavely runing ```eas build``` will give you a ```.aab``` file for publish
 If you have Expo Go, the entire project is available as a snack [here](https://snack.expo.dev/@wensley/final-project). However, the application does not run on web, so you will need to use your own device or the android emulator. 
 
 ## Technical Stuff
-The application is running with a MVC framework. React native is used for the view, and [Redux](https://redux.js.org/introduction/getting-started) is used for the Model and Controller. 
 
-![MVC](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/MVC.png)
+### MVC
+The application uses an MVC design pattern. React native is used for the view, and [Redux](https://redux.js.org/introduction/getting-started) is used for the Model and Controller. 
+
+<p align="center">
+  <img height="200" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/MVC.png"/>
+</p>
 
 #### Model
 The model is a JSON object that is managed by a Redux reducer. It is persistent thanks to the [Redux Persist](https://github.com/rt2zz/redux-persist) library. This ensures that the model is consistent even if the app is closed. 
@@ -134,11 +138,25 @@ Each screen is the view. When the user interacts with the UI, the view makes a f
 #### Controller
 The Redux reducer is the controller. It responds to function calls and modifies the model accordingly. The reducer has three primary types of operations: Create, Update, and Delete. 
 
+### Main Packages
+The main navigation in this project was done with [React Native Navigation](https://github.com/wix/react-native-navigation). There is both a drawer navigator and a tab navigator. The drawer navigator is used to move between the daily and weekly screens, while the drawer navigator is used to move to the settings and reminders screens. 
 
+The way the data was managed in this project was through [Redux](https://redux.js.org/introduction/getting-started). This allowed for more complex data manipulation, and the ability to follow the MVC design pattern. 
 
 
 ## What's Next? 
+### Notifications
+One of the things that was planned at the beginning of this project but had not been completed is notifications. In the future, the reminders set will notify you so that you remember to do these things even while not actively using the app. This will greatly improve the usefulness of the app.
+
+### Monthly Page
+In addition to the daily and weekly pages, it would be useful to have a monthly view. This would allow the user to get a full picture of what they have in the coming month. This would allow the user to make more long term goals. 
+
+### Task Ordering
+In its current state, the application is little more than a digital dayplanner. In order to increase its usefulness and provide some real functionality, I would like to implement an algorithm that intelligently orders the tasks in order of importance. Additionally, I would like to automatically create short term daily goals when there is a long term goal like a final project. 
+If there was a final project due in 2 months, the application would generate several goals each week related to this task. This would allow the user to stay focused on these long term goals by creating consistent related short term goals. Unfortunately this was out of the scope of this project, but I believe this would be useful to me in the future. 
+
 
 ## Known Bugs
+
 
 ## Manifest
