@@ -13,11 +13,11 @@ import AppLoading from 'expo-app-loading';
 
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
-import Line from '/components/Line';
-import Task from '/components/tasks/Task';
+import Line from '../Line';
+import Task from '../tasks/Task';
 
-import TaskCreator from '/components/tasks/TaskCreator';
-import { getTasksBefore, createDailyProgress } from '/actions/task';
+import TaskCreator from '../tasks/TaskCreator';
+import { getTasksBefore, createDailyProgress } from '../../actions/actions';
 import { useSelector, useDispatch } from "react-redux";
 
 function SetIndividualPercent(list, setter){

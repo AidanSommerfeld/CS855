@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "final-project",
-    "slug": "snack-e994c318-7336-485a-9407-b21aeed22bd1",
+    "slug": "habit-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.wensely.habit_tracker"
     },
     "web": {
       "favicon": "./assets/favicon.png"

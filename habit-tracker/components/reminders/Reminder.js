@@ -5,7 +5,7 @@ import { useTheme } from '@react-navigation/native';
 import { View, Text, StyleSheet, TouchableWithoutFeedback, Alert, Pressable, TextInput } from 'react-native';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 
-import { updateReminder } from '/actions/task'
+import { updateReminder } from '../../actions/actions'
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 

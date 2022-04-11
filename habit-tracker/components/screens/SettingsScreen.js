@@ -3,15 +3,15 @@ import { useState, useRef } from 'react';
 import { Button, View, Text, Switch, StyleSheet, ScrollView, Pressable, Animated} from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
-import { ThemeContext } from '/contexts/ThemeContext';
-import { NotificationContext } from '/contexts/NotificationContext';
-import { VibrationContext } from '/contexts/VibrationContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { NotificationContext } from '../../contexts/NotificationContext';
+import { VibrationContext } from '../../contexts/VibrationContext';
 
 import { Feather } from '@expo/vector-icons'; 
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAllData, setTheme, setVibration } from '/actions/task'
+import { deleteAllData, setTheme, setVibration } from '../../actions/actions'
 
 import * as Haptics from 'expo-haptics';
 

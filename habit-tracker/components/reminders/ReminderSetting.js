@@ -5,11 +5,9 @@ import { useTheme } from '@react-navigation/native';
 import { View, Text, StyleSheet, TouchableWithoutFeedback, Alert, Pressable, TextInput } from 'react-native';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 
-import {  updateReminderName, deleteReminder, renameTask } from '/actions/task'
+import {  updateReminderName, deleteReminder, renameTask, getTasksBefore, updateReminderTime } from '../../actions/actions'
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
-
-import { getTasksBefore, updateReminderTime } from '/actions/task';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from "moment";

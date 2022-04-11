@@ -4,7 +4,7 @@ import { useTheme } from '@react-navigation/native';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { useSelector, useDispatch } from "react-redux";
 
-import Reminder from '/components/reminders/Reminder';
+import Reminder from './Reminder';
 
 export default function DailyReminders() {
   const { colors } = useTheme();

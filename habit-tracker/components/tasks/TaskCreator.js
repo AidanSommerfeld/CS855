@@ -5,13 +5,13 @@ import { useTheme } from '@react-navigation/native';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 import { AntDesign } from '@expo/vector-icons'; 
 import { connect } from 'react-redux';
-import { createTask, updateTask, deleteTask } from '/actions/task'
+import { createTask, updateTask, deleteTask } from '../../actions/actions'
 import { useSelector, useDispatch } from "react-redux";
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import * as Haptics from 'expo-haptics';
-import { VibrationContext } from '/contexts/VibrationContext';
+import { VibrationContext } from '../../contexts/VibrationContext';
 
 
 export default function TaskCreator({setModalVisible, modalVisible}){

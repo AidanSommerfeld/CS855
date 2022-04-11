@@ -8,17 +8,19 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 import AppLoading from 'expo-app-loading';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
-import Line from '/components/Line';
-import Task from '/components/tasks/Task';
+import * as Haptics from 'expo-haptics';
 
-import TaskCreator from '/components/tasks/TaskCreator';
-import { getTasksBefore } from '/actions/task';
+import Line from '../Line';
+import Task from '../tasks/Task';
+
+import TaskCreator from '../tasks/TaskCreator';
+import { getTasksBefore } from '../../actions/actions';
 import { useSelector, useDispatch } from "react-redux";
 
-import * as Haptics from 'expo-haptics';
-import { VibrationContext } from '/contexts/VibrationContext';
 
-import ProgressBar from '/components/ProgressBar';
+import { VibrationContext } from '../../contexts/VibrationContext';
+
+import ProgressBar from '../ProgressBar';
 
 function GetColors(time){
   const { colors, dark } = useTheme();

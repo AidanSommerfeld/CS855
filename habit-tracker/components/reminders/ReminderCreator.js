@@ -5,7 +5,7 @@ import { useTheme } from '@react-navigation/native';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 import { AntDesign } from '@expo/vector-icons'; 
 import { connect } from 'react-redux';
-import { createReminder, updateReminder, deleteReminder } from '/actions/task'
+import { createReminder, updateReminder, deleteReminder } from '../../actions/actions'
 import { useSelector, useDispatch } from "react-redux";
 
 import DateTimePicker from '@react-native-community/datetimepicker';

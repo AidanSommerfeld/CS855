@@ -5,7 +5,7 @@ import { useTheme } from '@react-navigation/native';
 import { View, Text, StyleSheet, TouchableWithoutFeedback, Alert, Pressable, TextInput } from 'react-native';
 import { useFonts, Questrial_400Regular } from '@expo-google-fonts/questrial';
 
-import { createTask, updateTask, deleteTask, renameTask } from '/components/tasks/Task'
+import { createTask, updateTask, deleteTask, renameTask } from '../../actions/actions';
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 

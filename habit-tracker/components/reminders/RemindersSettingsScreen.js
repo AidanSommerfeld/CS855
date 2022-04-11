@@ -6,11 +6,11 @@ import { useTheme } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
-import { getTasksBefore } from '/actions/task';
+import { getTasksBefore } from '../../actions/actions';
 import { useSelector, useDispatch } from "react-redux";
 
-import ReminderSetting from '/components/reminders/ReminderSetting';
-import ReminderCreator from '/components/reminders/ReminderCreator';
+import ReminderSetting from './ReminderSetting';
+import ReminderCreator from './ReminderCreator';
 
 export default function RemindersSettingsScreen() {
   const { colors } = useTheme();
