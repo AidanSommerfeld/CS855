@@ -115,7 +115,7 @@ Then, navigate to the directory with the source code, and enter the ```habit-tra
 Then, to build an apk run
 ```eas build -p android --profile preview```
 This will build the apk online and give you a QR code to install it on your device. 
-Alternitavely runing ```eas build``` will give you a ```.abb``` file for publishing on the app store. 
+Alternitavely runing ```eas build``` will give you a ```.aab``` file for publishing on the app store. 
 
 ### Expo Snack
 If you have Expo Go, the entire project is available as a snack [here](https://snack.expo.dev/@wensley/final-project). However, the application does not run on web, so you will need to use your own device or the android emulator. 
