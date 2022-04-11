@@ -32,10 +32,16 @@ A task is anything that has a deadline and can be completed over the course of o
 ## Features
 ![Screens](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/BannerScreens.png)
 <p align="center">
-  <b>Habit Tracker main screens</b>
+  <b>Habit Tracker main screens</b><br>
+  [Weekly](#weekly) - Daily - Reminders - Settings
 </p>
 
+### Weekly
+The weekly page shows all of the [tasks](#task) set for the current calendar week. This page allows the user to add new tasks, and mark the current weekly tasks as complete. The progress for each day is shown as a vertical progress bar for each day. 
 
+### Daily
+### Reminders
+### Settings
 
 ## Installation Instructions
 
