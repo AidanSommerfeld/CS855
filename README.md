@@ -51,7 +51,7 @@ The example shows a user checking and unchecking weekly tasks, and viewing daily
 
 ### Daily
 <img align="left" height="475" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Daily-Animation.gif"/>
-The daily page shows all of the [tasks](#task) that the user has up for the current day. In addition, it shows the progress towards the daily [reminders](#reminder) in each category. The user can do the following: 
+The daily screen is the first screen that the user sees when they open the app. It shows all of the tasks that the user has up for the current day. In addition, it shows the progress towards the daily reminders in each category. The user can do the following: 
 
 #### View and edit todays tasks
 The user can create, edit, and delete tasks that occur today. When a user creates a new task, they choose a title and a day that it is due. They can choose to rename a task by using the edit button inline with the tasks heading. This changes the check boxes into an inline text input to change any of the task names. The saving is done automatically. As tasks are completed, the taskbar under todays date will update to show total completion. 
