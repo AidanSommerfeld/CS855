@@ -36,6 +36,8 @@ A task is anything that has a deadline and can be completed over the course of o
   Weekly - Daily - Reminders - Settings
 </p>
 
+
+----
 <img align="right" height="475" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Weekly-Animation.gif"/>
 
 ### Weekly
@@ -47,9 +49,11 @@ Each task that the user has created over the course of the calander week will ap
 #### View the daily progress for each day of the week
 Each day has a vertical progress bar. This shows the number of completed tasks for each day. When a user taps on this, they are taken to the history page. This page displays an overview consisting of the date, the number of tasks for the day, and a list of finished and unfinished tasks. On this page, the user can check or uncheck tasks, but they cannot edit the tasks. 
 
-The example shows a user checking and unchecking weekly tasks, and viewing daily progress.
+The example shows a user checking and unchecking weekly tasks, and viewing daily progress for April 10th.
 
+----
 ### Daily
+
 <img align="left" height="475" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Daily-Animation.gif"/>
 The daily screen is the first screen that the user sees when they open the app. It shows all of the tasks that the user has up for the current day. In addition, it shows the progress towards the daily reminders in each category. The user can do the following: 
 
@@ -61,7 +65,9 @@ The user can interact with and complete daily reminders by tapping anywhere unde
 
 The example shows a user creating a new reminder. They give it a title, then select a date with the date picker. Then they check off their daily tasks, and complete some of their daily reminders. 
 
+----
 ### Reminders
+
 <img align="right" height="350" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Reminders-Animation.gif"/>
 The reminders page is where the user is able to set up repeating reminders. These reminders are refreshed every day so that the user can keep track of their daily activities. Users can interact with this page in the following ways: 
 
@@ -73,7 +79,9 @@ If the user selects an edit button for any of the four categories, they are able
 
 The example shows a user creating a new meal, then changing the title. 
 
+----
 ### Settings
+
 
 ## Installation Instructions
 
