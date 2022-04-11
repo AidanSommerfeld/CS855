@@ -1,3 +1,13 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  WeeklyScreen.js
+
+  Shows the weekly tasks, and percentages complete for each day in the current calander week. 
+
+ */}
+
 import * as React from 'react';
 import { useTheme } from '@react-navigation/native';
 
@@ -22,6 +32,7 @@ import { VibrationContext } from '../../contexts/VibrationContext';
 
 import ProgressBar from '../ProgressBar';
 
+{/* Returns the theme for the background based on the time */}
 function GetColors(time){
   const { colors, dark } = useTheme();
   if(time == 'morning'){
@@ -41,6 +52,7 @@ function GetColors(time){
   }
 }
 
+{/* Returns the time string used for the theme colors and the greeting */}
 function GetTime(){
   var today = new Date(); 
   var hour = today.getHours();
@@ -54,6 +66,7 @@ function GetTime(){
     return 'night';
 }
 
+{/* Returns the start of day with the given date object */}
 function getStartOfDay(day){
   let date = new Date();
 
@@ -63,6 +76,7 @@ function getStartOfDay(day){
   return date;
 }
 
+{/* Returns the end of day with the given date object */}
 function getEndOfDay(day){
   let date = new Date();
   
@@ -72,6 +86,7 @@ function getEndOfDay(day){
   return date;
 }
 
+{/* Returns the daily percent complete for the given day */}
 function getDailyPercent(day, tasks){
   let daily = tasks.filter((item) => Date.parse(item.deadline) >= getStartOfDay(day) && Date.parse(item.deadline) <= getEndOfDay(day));
   let dailyListLength = Object.keys(daily).length;
@@ -85,6 +100,7 @@ function getDailyPercent(day, tasks){
     return count / dailyListLength;
 }
 
+{/* Returns the daily percent, start of day, end of day, and the day of the month for each day of the current week */}
 function getWeeklyData(tasks){
   let percents = [];
   for(let i = 0; i < 7; i++){
@@ -98,6 +114,8 @@ function getWeeklyData(tasks){
   return percents;
 }
 
+
+{/* Displays the weekly screen */}
 export default function WeeklyScreen({ navigation }) {
   const { colors } = useTheme();
   const [dailyPercent, setDailyPercent] = useState(0.0);

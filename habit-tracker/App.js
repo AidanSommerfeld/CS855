@@ -1,3 +1,13 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  Habit Tracker - CS 855
+
+  This application is for tracking tasks and reminders. It was created for CS 855 - Mobile Computing at the University of Regina.
+
+ */}
+
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer, DarkTheme, DefaultTheme} from '@react-navigation/native';
@@ -15,8 +25,11 @@ import configureStore from './store';
 import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 
+
+{/* Initialize the redux store. This is used as the controller in the MVC design pattern */}
 const store = configureStore();
 
+{/* Sets the store as persistent to save and load data when the app closes */}
 const persistor = persistStore(store);
 
 

@@ -1,3 +1,15 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  History.js
+
+  Shows a simplified daily screen. Used when interacting with days on the weekly screen. 
+  This shows the date, the number of tasks for that day and a list of tasks. 
+  The user can check and uncheck tasks here, but they cannot edit, add, or delete them.
+
+ */}
+
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
@@ -28,7 +40,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { VibrationContext } from '../../contexts/VibrationContext';
 
 
-
+{/* Display the history screen */}
 export default function HistoryScreen({ navigation, route }) {
   const { colors } = useTheme();
   const [dailyPercent, setDailyPercent] = useState(0.0);

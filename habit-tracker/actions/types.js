@@ -1,3 +1,13 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  types.js
+
+  Defines types for the actions in the reducers. 
+
+ */}
+
 export const CREATE_TASK = 'CREATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';

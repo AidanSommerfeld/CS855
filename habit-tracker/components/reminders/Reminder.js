@@ -1,3 +1,13 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  Reminders.js
+
+  Reminder checkbox item for use in FlatLists
+
+ */}
+
 import * as React from 'react';
 import { useState } from 'react';
 import { Checkbox } from 'react-native-paper';
@@ -9,7 +19,7 @@ import { updateReminder } from '../../actions/actions'
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
-
+{/* Displays the reminder checkbox item */}
 export default function Reminder({title, id, selected, category}){
   const [checked, setChecked] = useState(selected);
   const { colors } = useTheme();

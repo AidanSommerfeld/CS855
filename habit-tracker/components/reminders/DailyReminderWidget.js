@@ -1,3 +1,14 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  DailyReminderWidget.js
+
+  This shows the progress of each of the four categories. 
+  This is displayed as four stacked progress bars.  
+
+ */}
+
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
@@ -20,6 +31,12 @@ import TaskCreator from '../tasks/TaskCreator';
 import { getTasksBefore, createDailyProgress } from '../../actions/actions';
 import { useSelector, useDispatch } from "react-redux";
 
+
+{/* 
+  Purpose: get the number of completed entries in the list
+  Input: <list> a list of reminders, <setter> the setting function for the individual category percent. 
+  Output: sets the percent to (-1) if the list is empty, otherwise it reterns a value between 0 to 1. 
+*/}
 function SetIndividualPercent(list, setter){
   const total = Object.keys(list).length;
   const complete = list.filter((item) => item.isChecked === true).length;
@@ -30,6 +47,15 @@ function SetIndividualPercent(list, setter){
     setter(complete/total);
 }
 
+{/* 
+  Purpose: set the percent value for all four categories
+  Input: <reminders>, the list of all reminders
+         <setMealPercent>
+         <setWaterPercent>
+         <setMedsPercent>
+         <setExercisePercent> setter functions for percent values. 
+  Output: calls SetIndividualPercent on each category.  
+*/}
 function SetAllPercents(reminders, setMealPercent, setWaterPercent, setMedsPercent, setExercisePercent){
   if(Object.keys(reminders).length == 0)
     return;
@@ -39,6 +65,7 @@ function SetAllPercents(reminders, setMealPercent, setWaterPercent, setMedsPerce
   SetIndividualPercent(reminders.exercise, setExercisePercent);
 }
 
+{/* displays the daily reminder widget */}
 export default function DailyReminderWidget(){
   const { colors } = useTheme();
 

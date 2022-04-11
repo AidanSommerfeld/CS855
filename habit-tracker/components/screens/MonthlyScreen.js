@@ -1,3 +1,13 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  MonthlyScreen.js
+
+  Unfinished monthly screen. This would have shown all tasks for the given month. 
+
+ */}
+
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { useTheme } from '@react-navigation/native';

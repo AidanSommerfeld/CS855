@@ -1,3 +1,13 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  ReminderSettings.js
+
+  Shows the UI for a reminder setting. This allows the user to view and edit a reminder setting. 
+
+ */}
+
 import * as React from 'react';
 import { useState } from 'react';
 import { Checkbox } from 'react-native-paper';
@@ -12,6 +22,7 @@ import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from "moment";
 
+{/* Displays the reminder setting */}
 export default function ReminderSetting({title, id, editing, time}){
   
   const { colors } = useTheme();
@@ -21,6 +32,7 @@ export default function ReminderSetting({title, id, editing, time}){
   let today = new Date();
   const [date, setDate] = useState(today);
 
+  {/* Returns the time from the time picker and sets the state */}
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setShowDatePicker(false);

@@ -1,3 +1,14 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  Navigation.js
+
+  Creates the Drawer navigator for daily and weekly pages, 
+  Creates the bottom tab navigator for daily pages, reminder settings, and settings. 
+
+ */}
+
 import * as React from 'react';
 import { useState } from 'react';
 import { View, Button, Text, StatusBar } from 'react-native';

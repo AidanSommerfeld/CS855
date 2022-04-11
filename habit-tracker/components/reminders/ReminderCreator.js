@@ -1,3 +1,14 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  ReminderCreator.js
+
+  Modal UI for creating a reminder. 
+  It lets the user enter a title, and a time for the Reminders. 
+
+ */}
+
 import * as React from 'react';
 import { useState } from 'react'
 import { Button, View, Text, TextInput, ScrollView, StyleSheet, FlatList, Pressable, Modal, Alert } from 'react-native';
@@ -12,7 +23,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import moment from "moment";
 
-
+{/* Displays the UI for the reminder creator */}
 export default function ReminderCreator({setModalVisible, modalVisible, type}){
   const { colors, isDark } = useTheme();
 
@@ -23,6 +34,7 @@ export default function ReminderCreator({setModalVisible, modalVisible, type}){
   let today = new Date();
   const [date, setDate] = useState(today);
 
+  {/* Called when the time picker returns a date. This updates the state to be used in submit */}
   const onChange = (event, selectedDate) => {
     let currentDate = selectedDate;
     setShow(false);
@@ -33,6 +45,7 @@ export default function ReminderCreator({setModalVisible, modalVisible, type}){
     }
   };
 
+  {/* Called when the user submits their new reminder. It sends a dispatch to the reducer using the createReminder action */}
   const Submit = (category) => {
     if( title !== "")
     {

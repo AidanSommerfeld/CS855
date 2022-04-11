@@ -1,3 +1,14 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  TaskCreator.js
+
+  Shows the UI for creating a new task. 
+  The user enters a date, and a title for the task. 
+
+ */}
+
 import * as React from 'react';
 import { useState } from 'react'
 import { Button, View, Text, TextInput, ScrollView, StyleSheet, FlatList, Pressable, Modal, Alert } from 'react-native';
@@ -13,7 +24,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Haptics from 'expo-haptics';
 import { VibrationContext } from '../../contexts/VibrationContext';
 
-
+{/* Displays the task creator */}
 export default function TaskCreator({setModalVisible, modalVisible}){
   const { colors, isDark } = useTheme();
   const { vibration, useVibration } = React.useContext(VibrationContext);
@@ -25,6 +36,7 @@ export default function TaskCreator({setModalVisible, modalVisible}){
   let today = new Date();
   const [date, setDate] = useState(today);
 
+  {/* Get the new date from the date picker and set the state */}
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setShow(false);
@@ -32,6 +44,7 @@ export default function TaskCreator({setModalVisible, modalVisible}){
       setDate(currentDate);
   };
 
+  {/* Submit the new task using the create task action, Alert if the Task name is empty */}
   const Submit = () => {
     if(vibration)
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);

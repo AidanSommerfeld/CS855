@@ -1,3 +1,14 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  RemindersSettingsScreen.js
+
+  Shows the page where the user can manage their daily reminders. 
+  This includes the time the reminders are for, and the categories of the reminders. 
+
+ */}
+
 import React from 'react';
 import { useState } from 'react'
 import { ScrollView, View, Text, Pressable, StyleSheet, FlatList, Modal, Alert } from 'react-native';
@@ -12,6 +23,8 @@ import { useSelector, useDispatch } from "react-redux";
 import ReminderSetting from './ReminderSetting';
 import ReminderCreator from './ReminderCreator';
 
+
+{/* Displays the reminder setting screen */}
 export default function RemindersSettingsScreen() {
   const { colors } = useTheme();
   const reminderList = useSelector((state) => state.tasksReducer.reminderList);
@@ -24,6 +37,7 @@ export default function RemindersSettingsScreen() {
 
   const [reminderType, setReminderType] = useState("Meal");
 
+  {/* Open the create reminder modal */}
   const openModal = (type) => {
     setReminderType(type)
     setModalVisible(true);

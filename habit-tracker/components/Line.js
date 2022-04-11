@@ -1,3 +1,13 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  Line.js
+
+  Creates a horizontal rule line
+
+ */}
+
 import React from 'react';
 import { View } from 'react-native';
 import { useTheme } from '@react-navigation/native';

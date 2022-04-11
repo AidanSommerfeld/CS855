@@ -1,3 +1,13 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  SettingsScreen.js
+
+  Shows the settings screen with options to change the theme, enable/disable vibration, and delete all data. 
+
+ */}
+
 import * as React from 'react';
 import { useState, useRef } from 'react';
 import { Button, View, Text, Switch, StyleSheet, ScrollView, Pressable, Animated} from 'react-native';
@@ -15,7 +25,7 @@ import { deleteAllData, setTheme, setVibration } from '../../actions/actions'
 
 import * as Haptics from 'expo-haptics';
 
-
+{/* Displays the switch for toggling dark theme */}
 function ThemeSelector() {
   const { useDarkTheme, darkTheme } = React.useContext(ThemeContext);
   const { vibration, useVibration } = React.useContext(VibrationContext);
@@ -45,6 +55,7 @@ function ThemeSelector() {
   );
 }
 
+{/* Displays a switch for toggling notifications - This is unused */}
 function NotificationSelector() {
   const { useNotifications, notifications } = React.useContext(NotificationContext);
   const { vibration, useVibration } = React.useContext(VibrationContext);
@@ -69,6 +80,7 @@ function NotificationSelector() {
   );
 }
 
+{/* Displays the switch for toggling vibration */}
 function VibrationSelector() {
   const { vibration, useVibration } = React.useContext(VibrationContext);
   const { colors } = useTheme();
@@ -97,6 +109,7 @@ function VibrationSelector() {
   );
 }
 
+{/* Displays the delete option. This will slowly fill up as the user holds the button once it reaches 100%, all data is deleted */}
 function DeleteOption(){
   var timer = useRef(new Animated.Value(0)).current;
   var timerId;
@@ -147,6 +160,7 @@ function DeleteOption(){
   );
 }
 
+{/* Displays the settings screen, with the theme, vibration, and delete options */}
 export default function SettingsScreen() {
   const { colors } = useTheme();
   return(

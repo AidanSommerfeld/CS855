@@ -1,3 +1,13 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  ProgressBar.js
+
+  A vertical progress bar used on the weekly screen. It contains a day, and routes the user to the history screen. 
+
+ */}
+
 import * as React from 'react';
 import { Button, View, Text, StyleSheet, Pressable, Alert, Animated } from 'react-native';
 import { useTheme } from '@react-navigation/native';

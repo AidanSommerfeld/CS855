@@ -1,3 +1,16 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  DailyReminders.js
+
+  Shows the Daily Reminder Page.
+  This is the page that the user can interact with their daily reminders. 
+
+  This page gives all the reminders from each of the four categories, allowing the user to check off their daily reminders. 
+
+ */}
+
 import React from 'react';
 import { View, Text, ScrollView, FlatList, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
@@ -6,12 +19,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Reminder from './Reminder';
 
+{/* displays the daily reminder page */}
 export default function DailyReminders() {
   const { colors } = useTheme();
   const reminderList = useSelector((state) => state.tasksReducer.dailyReminderProgress);
 
   const state = useSelector((state)=> state.tasksReducer);
-  console.log(state)
   return (
     <ScrollView style={{backgroundColor:colors.background}}>
       <View style={styles.inline}>

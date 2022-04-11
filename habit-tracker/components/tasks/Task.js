@@ -1,3 +1,14 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  Task.js
+
+  Displays a task item that is used in FlatLists. 
+  Has a checkbox, and when editing is enabled, it has a text input, and a delete button. 
+
+ */}
+
 import * as React from 'react';
 import { useState } from 'react';
 import { Checkbox } from 'react-native-paper';

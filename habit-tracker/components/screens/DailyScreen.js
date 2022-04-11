@@ -1,3 +1,14 @@
+{/*
+  Aidan Sommerfeld
+  200362730
+
+  DailyScreen.js
+
+  Shows the Daily Screen. This is the first page a user sees when opening the app. 
+  It shows a greeting, a daily progress bar, the daily reminders widget, and a list of tasks. 
+
+ */}
+
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
@@ -27,6 +38,7 @@ import { getTasksBefore, createDailyProgress } from '../../actions/actions';
 import { VibrationContext } from '../../contexts/VibrationContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
+{/* Returns the theme for the background based on the time */}
 function GetColors(time){
   const { colors, dark } = useTheme();
   if(time == 'morning'){
@@ -46,6 +58,7 @@ function GetColors(time){
   }
 }
 
+{/* Returns the time string used for the theme colors and the greeting */}
 function GetTime(){
   var today = new Date(); 
   var hour = today.getHours();
@@ -59,7 +72,7 @@ function GetTime(){
     return 'night';
 }
 
-
+ {/* Displays the daily screen */}
 export default function DailyScreen({ navigation }) {
   const { colors } = useTheme();
   const [dailyPercent, setDailyPercent] = useState(0.0);
@@ -69,27 +82,30 @@ export default function DailyScreen({ navigation }) {
 
   const taskList = useSelector((state) => state.tasksReducer.taskList);
 
+  {/* Sets the vibration based on the setting, and loads from the persisted store */}
   const savedVibration = useSelector((state)=> state.tasksReducer.vibration)
   const { vibration, useVibration } = React.useContext(VibrationContext);
   useVibration(savedVibration)
 
+ {/* Sets the theme based on the setting, and loads from the persisted store */}
   const { theme, useDarkTheme } = React.useContext(ThemeContext);
   const savedDarkTheme = useSelector((state) => state.tasksReducer.darkTheme);
   useDarkTheme(savedDarkTheme);
 
-  
+  {/* Gets all tasks with a deadline before the end of the day */}
   const endOfDay = new Date();
   const dateString = endOfDay.toDateString();
   endOfDay.setUTCHours(23, 59, 59, 999);
   const dailyTaskList = useSelector((state) => state.tasksReducer.taskList.filter((item) =>
           Date.parse(item.deadline) <= endOfDay));
 
+  {/* Gets the percentage of completed tasks for the taskbar */}
   let taskListLength = Object.keys(taskList).length;
   let count = taskList.filter(function(element) {
       return element.isChecked === true;
     }).length;
 
-  //console.log(taskList);
+  
   let [fontsLoaded] = useFonts({
     Questrial_400Regular,
   });
