@@ -121,6 +121,21 @@ Alternitavely runing ```eas build``` will give you a ```.aab``` file for publish
 If you have Expo Go, the entire project is available as a snack [here](https://snack.expo.dev/@wensley/final-project). However, the application does not run on web, so you will need to use your own device or the android emulator. 
 
 ## Technical Stuff
+The application is running with a MVC framework. React native is used for the view, and [Redux](https://redux.js.org/introduction/getting-started) is used for the Model and Controller. 
+
+![MVC](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/MVC.png)
+
+#### Model
+The model is a JSON object that is managed by a Redux reducer. It is persistent thanks to the [Redux Persist](https://github.com/rt2zz/redux-persist) library. This ensures that the model is consistent even if the app is closed. 
+
+#### View
+Each screen is the view. When the user interacts with the UI, the view makes a function call to the Reducer requesting a change to the model. When the model is changed, the view is updated according to the change. 
+
+#### Controller
+The Redux reducer is the controller. It responds to function calls and modifies the model accordingly. The reducer has three primary types of operations: Create, Update, and Delete. 
+
+
+
 
 ## What's Next? 
 
