@@ -62,7 +62,16 @@ The user can interact with and complete daily reminders by tapping anywhere unde
 The example shows a user creating a new reminder. They give it a title, then select a date with the date picker. Then they check off their daily tasks, and complete some of their daily reminders. 
 
 ### Reminders
-<img align="right" height="475" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Reminders-Animation.gif"/>
+<img align="right" height="350" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Reminders-Animation.gif"/>
+The reminders page is where the user is able to set up repeating reminders. These reminders are refreshed every day so that the user can keep track of their daily activities. Users can interact with this page in the following ways: 
+
+#### Create new reminders
+The user can create a new reminder in any of the four categories by pressing the corresponding plus icon. This will bring up a screen much like the task creator. In this screen the user can create a title for the reminder, and set the time that the reminder is supposed to be completed by. This will add a new reminder to the list. 
+
+#### Edit or delete reminders
+If the user selects an edit button for any of the four categories, they are able to type a new name for any of the tasks. This will update the name in the daily screen as well. The user can also change the time of these reminders by pressing the clock icon next to the delete button. This brings up the time picker for the user to select. If the user wants to delete the reminder, they can press the delete button. This will remove it from the list, as well as from the daily screen.
+
+The example shows a user creating a new meal, then changing the title. 
 
 ### Settings
 
