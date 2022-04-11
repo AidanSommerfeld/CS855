@@ -81,6 +81,7 @@ The example shows a user creating a new meal, then changing the title.
 
 ----
 ### Settings
+<img align="left" height="475" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Settings-Animation.gif"/>
 
 
 ## Installation Instructions
