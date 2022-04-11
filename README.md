@@ -82,7 +82,17 @@ The example shows a user creating a new meal, then changing the title.
 ----
 ### Settings
 <img align="left" height="475" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Settings-Animation.gif"/>
+The settings screen allows users to customize their experience a little more. There are two sets of options: 
 
+#### Settings toggles
+The user is able to toggle the theme, which changes the default dark theme to a light theme. Each color was specifically chosen in the light theme to provide a brighter experience while keeping the overall look and feel of the UI. <br>
+The user is also able to toggle vibration. By default, the user will get haptic feedback when pressing the add or edit buttons. This makes the application more tactile, and gives interactions more weight. However, some users do not like this feedback, so there is the option to disable it. <br>
+These settings are preserved when the application is closed. 
+
+#### Delete all Data
+The delete all data option wipes the local storage for the application. This is done to remove all saved settings, tasks, and reminders returning the application to its default state. Because this is a highly destructive action, the user must press and hold the delete all data button for 5 seconds. There is visual feedback of this action, as the background fills up as the user holds the button. 
+
+The example shows the saved reminders. The user enters the settings and deletes all data. The reminders page is now empty.
 
 ## Installation Instructions
 
