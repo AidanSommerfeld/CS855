@@ -3,6 +3,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/AidanSommerfeld/CS855)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE.md)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/AidanSommerfeld/CS855?include_prereleases)
+![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/AidanSommerfeld/CS855)
 
 ![banner](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Banner.png)
 
@@ -29,6 +30,7 @@ A task is anything that has a deadline and can be completed over the course of o
 6. [Manifest](#manifest)
 
 ## Features
+
 
 ## Installation Instructions
 
