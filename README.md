@@ -8,7 +8,7 @@
 ![banner](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Banner.png)
 
 ## About
-Habit Tracker is a reminders and task keeping app developed for Android that helps you keep your schedule and track your assignments, deadlines, and chores. Habit Tracker features daily and weekly overviews of tasks to let you know what's coming up, helping you to prioritize your time accordingly.
+Habit Tracker is a reminders and task keeping app developed for Android that helps you keep your schedule and track your assignments, deadlines, and chores. Habit Tracker features daily and weekly overviews of tasks to let you know what's coming up, helping you to prioritize your time accordingly. The bright yellow accent was chosen as an energizing and motivating color.
 
 ### Reminder 
 A reminder is a task that renews every day. Every reminder has a time it should be completed, and a title. It can fall into one of four categories: 
@@ -81,10 +81,44 @@ The example shows a user creating a new meal, then changing the title.
 
 ----
 ### Settings
-<img align="left" height="475" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Settings-Animation.gif"/>
+<img align="left" height="350" src="https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Settings-Animation.gif"/>
+The settings screen allows users to customize their experience a little more. There are two sets of options: 
 
+#### Settings toggles
+The user is able to toggle the theme, which changes the default dark theme to a light theme. Each color was specifically chosen in the light theme to provide a brighter experience while keeping the overall look and feel of the UI. <br>
+The user is also able to toggle vibration. By default, the user will get haptic feedback when pressing the add or edit buttons. This makes the application more tactile, and gives interactions more weight. However, some users do not like this feedback, so there is the option to disable it. <br>
+These settings are preserved when the application is closed. 
+
+#### Delete all Data
+The delete all data option wipes the local storage for the application. This is done to remove all saved settings, tasks, and reminders returning the application to its default state. Because this is a highly destructive action, the user must press and hold the delete all data button for 5 seconds. There is visual feedback of this action, as the background fills up as the user holds the button. 
+
+The example shows the saved reminders. The user enters the settings and deletes all data. The reminders page is now empty.
 
 ## Installation Instructions
+
+### Simple Download
+For easiest installation, you can download the apk found [here](https://github.com/AidanSommerfeld/CS855/releases) directly onto your android device.
+Once the file has been downloaded, open the application and follow the prompts on screen. 
+
+### Compile Yourself
+An alternative method is to build the source code yourself. To do this, you will need an expo account and [EAS](https://docs.expo.dev/eas/). To begin, simply run 
+
+```npm install -g eas-cli```
+
+Now with EAS installed, login to your expo account with ```eas login```. 
+
+You can check if the login was successful by running 
+```eas whoami```
+which will return your username. 
+
+Then, navigate to the directory with the source code, and enter the ```habit-tracker``` folder. 
+Then, to build an apk run
+```eas build -p android --profile preview```
+This will build the apk online and give you a QR code to install it on your device. 
+Alternitavely runing ```eas build``` will give you a ```.aab``` file for publishing on the app store. 
+
+### Expo Snack
+If you have Expo Go, the entire project is available as a snack [here](https://snack.expo.dev/@wensley/final-project). However, the application does not run on web, so you will need to use your own device or the android emulator. 
 
 ## Technical Stuff
 
