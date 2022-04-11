@@ -1,4 +1,6 @@
 # CS855 - Habit Tracker
+![Lines of code](https://img.shields.io/tokei/lines/github/AidanSommerfeld/CS855)
+![GitHub top language](https://img.shields.io/github/languages/top/AidanSommerfeld/CS855)
 
 ![banner](https://github.com/AidanSommerfeld/CS855/blob/main/images/On%20Device/Banner.png)
 
